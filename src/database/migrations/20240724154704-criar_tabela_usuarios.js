@@ -4,7 +4,7 @@
 module.exports = {
   async up (queryInterface, Sequelize) {
 
-  await queryInterface.createTable('users', {
+  await queryInterface.createTable('usuarios', {
     id: {
       autoIncrement: true,
       primaryKey: true,
@@ -15,8 +15,21 @@ module.exports = {
       type: Sequelize.STRING(50),
       allowNull: false
     },
-    sexo_id:{
-      type: Sequelize.INTEGER,
+    cpf: {
+      type: Sequelize.STRING(14),
+      allowNull: false,
+      unique: true
+    },
+    endereco: {
+      type: Sequelize.STRING(150),
+      allowNull: false
+    },
+    data_nascimento: {
+      type: Sequelize.DATE,
+      allowNull: false
+    },
+    sexo:{
+      type: Sequelize.ENUM('Masculino', 'Feminino', 'Outro'),
       allowNull: false
     },
     email: {
@@ -24,7 +37,7 @@ module.exports = {
       allowNull: false,
       unique: true
     },
-    password_hash : { 
+    password: { 
       type: Sequelize.STRING,
       allowNull: false
     },
@@ -42,11 +55,8 @@ module.exports = {
   },
 
   async down (queryInterface, Sequelize) {
-    /**
-     * Add reverting commands here.
-     *
-     * Example:
-     * await queryInterface.dropTable('users');
-     */
+
+    await queryInterface.dropTable('usuarios');
+     
   }
 };
