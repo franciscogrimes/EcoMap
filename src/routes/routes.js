@@ -7,5 +7,6 @@ const routes = new Router()
 
 routes.use('/usuarios', usuariosRoutes)
 routes.use('/login', loginRoutes)
+routes.use('/local', pontosRoutes)
 
 module.exports = routes
