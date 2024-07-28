@@ -202,6 +202,28 @@ class PontosControllers {
 
         }
     }
+
+    async vizualizarMapa(request,response){
+        try{
+        const id = request.params.id
+        const ponto = await Ponto.findByPk(id)
+
+        if (!ponto) {
+            response
+              .status(404)
+              .json({ mensagem: "Não foi encontrado o ponto requisitado" });
+          }
+          const coordenadas = await getMapLocal(ponto.cep);
+
+          return response.status(200).json(coordenadas.googleMapsLink);
+
+        } catch (error) {
+            console.log(error)
+            return response.status(500).json({mensagem: "Não foi posível visualizar o pontos solicitado, devido a uma falha interna."})
+
+        }
+
+    }
 }
 
 module.exports = new PontosControllers()
