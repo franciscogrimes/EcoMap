@@ -21,7 +21,7 @@ const Pontos = connection.define("pontos", {
         type: DataTypes.STRING,
     },
     residuo: {
-      type: DataTypes.ENUM('Masculino', 'Feminino', 'Outro'), 
+      type: DataTypes.ENUM('Vidro', 'Papel', 'Plástico', 'Aluminio', 'Organico', 'Papelao', 'Pilhas', 'Todos'), 
     },
 });
 
