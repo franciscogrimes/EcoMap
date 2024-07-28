@@ -15,7 +15,9 @@ async function getMapLocal(cep){
             throw new Error('Localização não foi encontrada com esses dados');
         }
 
-        return { latitude: lat, longitude: lon, display_name }
+        const googleMapsLink = `https://www.google.com/maps?q=${lat},${lon}`;
+
+        return { latitude: lat, longitude: lon, display_name, googleMapsLink}
 
     } catch(error){
         console.error(error);
@@ -23,18 +25,17 @@ async function getMapLocal(cep){
     }
 }
 
-async function getGoogleMapsLink(local){
-    try {
-        const { lat, lon } = local;
+// async function getGoogleMapsLink(local){
+//     try {
+//         const {lat, long} = local
+//         const googleMapsLink = `https://www.google.com/maps?q=${lat},${long}`;
 
-        const googleMapsLink = `https://www.google.com/maps?q=${lat},${lon}`;
+//         return googleMapsLink;
 
-        return googleMapsLink;
+//     } catch(error){
+//         console.error(error);
+//         throw new Error('Erro gerar o link do Google Maps');
+//     }
+// }
 
-    } catch(error){
-        console.error(error);
-        throw new Error('Erro gerar o link do Google Maps');
-    }
-}
-
-module.exports = getMapLocal, getGoogleMapsLink
+module.exports = getMapLocal

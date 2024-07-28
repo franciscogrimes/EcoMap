@@ -1,5 +1,6 @@
 const Ponto = require('../models/Ponto')
 const getMapLocal = require('../services/service')
+const getGoogleMapsLink = require('../services/service')
 
 class PontosControllers {
 
@@ -20,6 +21,9 @@ class PontosControllers {
                 return response.status(409).json({ mensagem: "CEP já cadastrado." });
             } 
 
+            if(dados.latitude || dados.longitude){
+                return response.json({mensagem: "As coordenadas geograficas são preenchidas automaticamente."})
+            }
             const coordenadas = await getMapLocal(dados.cep)
             
             dados.latitude = coordenadas.latitude
@@ -59,14 +63,19 @@ class PontosControllers {
                 return response.status(404).json({mensagem: "Nenhum ponto encontrado."})
             }
 
-            const pontosComDetalhes = []
-
-            pontos.forEach(ponto => {
-              pontosComDetalhes.push({
-                nomeLocal: ponto.nomeLocal,
-                descricao: ponto.descricao 
-              });
-            });
+            
+            const pontosComDetalhes = await Promise.all(
+                pontos.map(async (ponto) => {
+                  const coordenadas = await getMapLocal(ponto.cep);
+          
+                  return {
+                    nomeLocal: ponto.nomeLocal,
+                    descricao: ponto.descricao,
+                    coordenada: coordenadas.googleMapsLink,
+                  };
+                })
+              );
+          
 
                 return response.status(200).json(pontosComDetalhes)
             }
