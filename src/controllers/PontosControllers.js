@@ -1,4 +1,5 @@
 const Ponto = require('../models/Ponto')
+const getMapLocal = require('../services/service')
 
 class PontosControllers {
 
@@ -11,12 +12,18 @@ class PontosControllers {
             }
 
 
+
             const cepExistente = await Ponto.findOne({ where: { cep: dados.cep } });
 
 
             if (cepExistente) {
                 return response.status(409).json({ mensagem: "CEP já cadastrado." });
             } 
+
+            const coordenadas = await getMapLocal(dados.cep)
+            
+            dados.latitude = coordenadas.latitude
+            dados.longitude = coordenadas.longitude
 
             await Ponto.create(dados)
             return response.status(201).json({mensagem: "Ponto registrado com sucesso!"})
@@ -26,7 +33,7 @@ class PontosControllers {
             return response.status(500).json({mensagem : "Não foi possível criar o usuário, devido a um erro interno"})
         }
     }
-    
+
     async visualizarTodos(request, response){
         try{
             const dados = request.body
