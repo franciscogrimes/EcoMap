@@ -36,7 +36,7 @@ class LoginControllers{
         },
             process.env.JWT_SECRET,
         {
-            expiresIn: '300'
+            expiresIn: '300m'
         })
     
         
