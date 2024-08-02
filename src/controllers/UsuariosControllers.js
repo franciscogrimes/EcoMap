@@ -6,8 +6,8 @@ class UsuariosControllers {
         try{
             const dados = request.body
 
-            if(!dados.nome || !dados.email || !dados.password){
-                return response.status(400).json({mensagem: "Preencha todos os campos obrigatórios. (Nome, Email e Senha)"})
+            if(!dados.nome || !dados.email || !dados.password || !dados.cpf || !dados.endereco || !dados.data_nascimento){
+                return response.status(400).json({mensagem: "Preencha todos os campos obrigatórios. (Nome, Email, Senha, CPF e Endereço)"})
             }
 
             const emailExistente = await Usuario.findOne({ where: { email: dados.email } });

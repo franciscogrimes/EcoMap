@@ -4,48 +4,70 @@ const getGoogleMapsLink = require('../services/service')
 
 class PontosControllers {
 
-    async criar(request, response){
-        try{
-            const dados = request.body
+    async criar(request, response) {
+        try {
+            const dados = request.body;
+            const userId = request.user.id; 
 
-            if(!dados.nomeLocal || !dados.usuario_id || !dados.descricao || !dados.cep || !dados.residuo){
-                return response.status(400).json({mensagem: "Preencha todos os campos obrigatórios. (Id usuário, nome do local, descrição, cep e resíduo)"})
+            if (!dados.nomeLocal || !dados.descricao || !dados.cep || !dados.residuo) {
+                return response.status(400).json({ mensagem: "Preencha todos os campos obrigatórios. (Nome do local, descrição, cep e resíduo)" });
             }
 
+            const pontoExistente = await Ponto.findOne({
+                where: { cep: dados.cep, usuario_id: userId },
+            });
 
+            if (pontoExistente) {
+                return response
+                    .status(409)
+                    .json({ mensagem: "CEP já cadastrado por você." });
+            }
 
             const cepExistente = await Ponto.findOne({ where: { cep: dados.cep } });
 
-
             if (cepExistente) {
                 return response.status(409).json({ mensagem: "CEP já cadastrado." });
-            } 
-
-            if(dados.latitude || dados.longitude){
-                return response.json({mensagem: "As coordenadas geograficas são preenchidas automaticamente."})
             }
-            const coordenadas = await getMapLocal(dados.cep)
-            
-            dados.latitude = coordenadas.latitude
-            dados.longitude = coordenadas.longitude
 
-            await Ponto.create(dados)
-            return response.status(201).json({mensagem: "Ponto registrado com sucesso!"})
+            if (dados.latitude || dados.longitude) {
+                return response.json({
+                    mensagem: "As coordenadas geográficas são preenchidas automaticamente.",
+                });
+            }
 
-        }catch(error){
-            console.log(error)
-            return response.status(500).json({mensagem : "Não foi possível criar o usuário, devido a um erro interno"})
+            const coordenadas = await getMapLocal(dados.cep);
+
+            if(coordenadas.error === "Localização não encontrada"){
+                response.status(404).json({mensagem: "Não encontramos as coordenadas de seu CEP, por favor tente novamente!"})
+            }
+
+            dados.latitude = coordenadas.latitude;
+            dados.longitude = coordenadas.longitude;
+            dados.usuario_id = userId; 
+
+            await Ponto.create(dados);
+            return response
+                .status(201)
+                .json({ mensagem: "Ponto registrado com sucesso!" });
+        } catch (error) {
+            console.log(error);
+            return response
+                .status(500)
+                .json({
+                    mensagem:
+                        "Não foi possível criar o ponto de coleta, devido a um erro interno",
+                });
         }
     }
-
     async visualizarTodos(request, response){
         try{
             const dados = request.body
             const nomeLocal = dados.nomeLocal
+            const userId = request.user.id; 
 
         if(nomeLocal){
 
-            const ponto = await Ponto.findOne({where:{nomeLocal: dados.nomeLocal}})
+            const ponto = await Ponto.findOne({where:{nomeLocal: dados.nomeLocal, usuario_id: userId}})
     
             if (!ponto) {
                 response
@@ -57,7 +79,7 @@ class PontosControllers {
 
         }
         
-        const pontos = await Ponto.findAll()
+        const pontos = await Ponto.findAll({where: {usuario_id:userId}})
 
             if (!pontos[0]){
                 return response.status(404).json({mensagem: "Nenhum ponto encontrado."})
@@ -88,14 +110,20 @@ class PontosControllers {
     async visualizarUm(request, response){
         try {
 
+        const userId = request.user.id; 
         const id = request.params.id
         const ponto = await Ponto.findByPk(id)
+
 
         if (!ponto) {
             response
               .status(404)
               .json({ mensagem: "Não foi encontrado o ponto requisitado" });
           }
+
+          if(ponto.usuario_id !== userId){
+            response.status(401).json({mensagem: "Você não está autorizado a visualizar pontos que não foram registrados por você."})
+        }
     
           return response.status(200).json(ponto);
 
@@ -107,39 +135,9 @@ class PontosControllers {
 
     }
 
-    async visualizarUmPeloNome(request, response){
-        try {
-
-        const dados = request.body
-
-
-
-        const nomeLocal = dados.nomeLocal
-
-        if(nomeLocal){
-
-            const ponto = await Ponto.findByPk(nomeLocal)
-    
-            if (!ponto) {
-                response
-                  .status(404)
-                  .json({ mensagem: "Não foi encontrado o ponto requisitado" });
-              }
-        
-              return response.status(200).json(ponto);
-
-        }
-
-        } catch (error) {
-            console.log(error)
-            return response.status(500).json({mensagem: "Não foi posível visualizar o pontos solicitado, devido a uma falha interna."})
-
-        }
-
-    }
-
     async deletarPonto(request, response){
         try {
+            const userId = request.user.id; 
 
             const id = request.params.id
             
@@ -151,7 +149,9 @@ class PontosControllers {
                   .json({ mensagem: "Não foi encontrado o ponto requisitado" });
               }
 
-              
+              if(ponto.usuario_id !== userId){
+                response.status(401).json({mensagem: "Você não está autorizado a excluir esse ponto."})
+            }
 
             await ponto.destroy()
 
@@ -168,6 +168,7 @@ class PontosControllers {
     async atualizarPonto(request, response){
 
         try {
+            const userId = request.user.id; 
 
             const dados = request.body
             const id = request.params.id
@@ -179,9 +180,12 @@ class PontosControllers {
               .status(404)
               .json({ mensagem: "Não foi encontrado o ponto requisitado" });
           }
+
+          if(ponto.usuario_id !== userId){
+            response.status(401).json({mensagem: "Você não está autorizado a alterar esse ponto."})
+        }
           
         
-        ponto.usuario_id = dados.usuario_id
         ponto.nomeLocal = dados.nomeLocal
         ponto.descricao = dados.descricao
         ponto.cep = dados.cep
@@ -207,12 +211,18 @@ class PontosControllers {
         try{
         const id = request.params.id
         const ponto = await Ponto.findByPk(id)
+        const userId = request.user.id; 
+
 
         if (!ponto) {
             response
               .status(404)
               .json({ mensagem: "Não foi encontrado o ponto requisitado" });
           }
+
+          if(ponto.usuario_id !== userId){
+            response.status(401).json({mensagem: "Você não está autorizado visualizar o mapa esse ponto."})
+        }
           const coordenadas = await getMapLocal(ponto.cep);
 
           return response.status(200).json(coordenadas.googleMapsLink);
