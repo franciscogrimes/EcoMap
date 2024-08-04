@@ -1,0 +1,424 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "API Ecomap",
+    "description": "Documentação da API Ecomap utilizando Express e Sequelize",
+    "version": "1.0.0"
+  },
+  "host": "localhost:3000",
+  "basePath": "/",
+  "schemes": [
+    "http"
+  ],
+  "securityDefinitions": {
+    "apiKeyAuth": {
+      "type": "apiKey",
+      "in": "header",
+      "name": "Authorization",
+      "description": "Insira o token JWT"
+    }
+  },
+  "paths": {
+    "/usuarios/": {
+      "post": {
+        "tags": [
+          "Usuarios"
+        ],
+        "description": "Endpoint para criação de novos usuarios.",
+        "parameters": [
+          {
+            "name": "criarUsuario",
+            "in": "body",
+            "description": "Criação de novos usuarios",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "nome": {
+                  "type": "string",
+                  "example": "Galvão Bueno"
+                },
+                "cpf": {
+                  "type": "string",
+                  "example": "00000000052"
+                },
+                "endereco": {
+                  "type": "string",
+                  "example": "Rua Globo confederação"
+                },
+                "data_nascimento": {
+                  "type": "number",
+                  "example": -1993
+                },
+                "email": {
+                  "type": "string",
+                  "example": "galvao@outlook.com"
+                },
+                "password": {
+                  "type": "string",
+                  "example": "Globo@123"
+                }
+              },
+              "required": [
+                "nome",
+                "cpf",
+                "endereco",
+                "data_nascimento",
+                "email",
+                "password"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "409": {
+            "description": "Conflict"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/login/": {
+      "post": {
+        "tags": [
+          "Login"
+        ],
+        "description": "Endpoint para realizar o login no ambiente.",
+        "parameters": [
+          {
+            "name": "login",
+            "in": "body",
+            "description": "Login no ambiente",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "email": {
+                  "type": "string",
+                  "example": "exemplo@gmail.com"
+                },
+                "password": {
+                  "type": "string",
+                  "example": "exemplo@123"
+                }
+              },
+              "required": [
+                "email",
+                "password"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/local/": {
+      "post": {
+        "tags": [
+          "Local"
+        ],
+        "description": "Endpoint para criar ponto de coleta.",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "criarPonto",
+            "in": "body",
+            "description": "Criação de ponto de coleta",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "nomeLocal": {
+                  "type": "string",
+                  "example": "Ecoponto exemplo"
+                },
+                "descricao": {
+                  "type": "string",
+                  "example": "Fechado Temporariamente"
+                },
+                "cep": {
+                  "type": "string",
+                  "example": "XXXXXXX"
+                },
+                "residuo": {
+                  "type": "string",
+                  "example": "Vidro"
+                }
+              },
+              "required": [
+                "nomeLocal",
+                "descricao",
+                "cep",
+                "residuo"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "409": {
+            "description": "Conflict"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Local"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/local/{id}": {
+      "get": {
+        "tags": [
+          "Local"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Local"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Local"
+        ],
+        "description": "Endpoint para alterar ponto de coleta.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "alterarPonto",
+            "in": "body",
+            "description": "Alteração de ponto de coleta",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "nomeLocal": {
+                  "type": "string",
+                  "example": "Ecoponto exemplo"
+                },
+                "descricao": {
+                  "type": "string",
+                  "example": "Fechado Temporariamente"
+                },
+                "cep": {
+                  "type": "string",
+                  "example": "XXXXXXX"
+                },
+                "residuo": {
+                  "type": "string",
+                  "example": "Vidro"
+                }
+              },
+              "required": [
+                "nomeLocal",
+                "descricao",
+                "cep",
+                "residuo"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/local/{id}/maps": {
+      "get": {
+        "tags": [
+          "Local"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    }
+  },
+  "security": [
+    {
+      "apiKeyAuth": []
+    }
+  ]
+}
