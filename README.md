@@ -5,7 +5,7 @@ O EcoMap Floripa é uma aplicação web desenvolvida em React que tem como objet
 O problema que o software resolve está relacionado à necessidade de conscientização e facilidade de acesso a informações sobre locais adequados para descarte de resíduos, 
 contribuindo para a preservação do meio ambiente e para a promoção de práticas sustentáveis na comunidade.
 
-<h3>Técnicas e Tecnologias Utilizadas:</h3>
+<h3>👨🏽‍💻Técnicas e Tecnologias Utilizadas:</h3>
 
 <ul>
 <li>**Node.js:** Ambiente de execução JavaScript, servindo como base para o desenvolvimento do backend do Ecomap.</li>
