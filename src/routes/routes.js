@@ -7,6 +7,12 @@ const auth = require('../middlewares/auth')
 
 const routes = new Router()
 
+const swaggerUi = require('swagger-ui-express');
+const swaggerDocument = require('./doc.swagger.json');
+
+routes.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+
+
 routes.use('/usuarios', usuariosRoutes)
 routes.use('/login', loginRoutes)
 
@@ -14,6 +20,5 @@ routes.use(auth)
 routes.use('/local',auth, pontosRoutes)
 
 
-routes.use('/local', pontosRoutes)
 
 module.exports = routes

@@ -110,9 +110,9 @@ class PontosControllers {
     async visualizarUm(request, response){
         try {
 
-        const userId = request.user.id; 
-        const id = request.params.id
-        const ponto = await Ponto.findByPk(id)
+            const id = request.params.id
+            const ponto = await Ponto.findByPk(id)
+            const userId = request.user.id; 
 
 
         if (!ponto) {
@@ -129,7 +129,7 @@ class PontosControllers {
 
         } catch (error) {
             console.log(error)
-            return response.status(500).json({mensagem: "Não foi posível visualizar o pontos solicitado, devido a uma falha interna."})
+            return response.status(500).json({mensagem: "Não foi posível visualizar o ponto solicitado, devido a uma falha interna."})
 
         }
 

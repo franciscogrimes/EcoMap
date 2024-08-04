@@ -1,5 +1,6 @@
 const express = require("express")
 const routes = require("./routes/routes")
+const cors = require('cors')
 const connection = require("./database/connection")
 const APP_PORT = process.env.APP_PORT
 
@@ -15,6 +16,7 @@ class Server {
     async middlewares(server) {
         console.log("Executando os middlewares")
         server.use(express.json())
+        server.use(cors())
         console.log("Middlewares executados")
     }
 
