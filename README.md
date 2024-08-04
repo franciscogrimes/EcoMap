@@ -7,17 +7,18 @@ contribuindo para a preservação do meio ambiente e para a promoção de práti
 
 <h3>Técnicas e Tecnologias Utilizadas:</h3>
 
-**Node.js:** Ambiente de execução JavaScript, servindo como base para o desenvolvimento do backend do Ecomap./n
-**Express.js:** Framework web leve e flexível para Node.js, utilizado para criar a estrutura da API RESTful do Ecomap, permitindo a comunicação entre o frontend e o backend./n
-**PostgreSQL:** Sistema de gerenciamento de banco de dados relacional (RDBMS) robusto e escalável, utilizado para armazenar as informações do Ecomap, como dados de usuários, locais de coleta e registros de coleta./n
-**Sequelize:** ORM (Object-Relational Mapper) para Node.js, simplificando a interação com o banco de dados PostgreSQL, permitindo a criação de modelos de dados, consultas e operações CRUD (Create, Read, Update, Delete) de forma mais organizada e eficiente./n
-**Sequelize-CLI:** Ferramenta de linha de comando para Sequelize, facilitando a criação de tabelas, migrações e outras operações relacionadas ao banco de dados./n
-**CORS:** Mecanismo que permite que recursos de diferentes origens (domínios, protocolos e portas) se comuniquem, garantindo segurança e flexibilidade na comunicação entre o frontend e o backend./n
-**JWT (JSON Web Token):** Padrão para criação de tokens de autenticação, utilizado para gerenciar a autenticação de usuários e garantir a segurança das requisições à API./n
-**Nodemon:** Ferramenta que monitora as alterações nos arquivos do projeto e reinicia automaticamente o servidor Node.js, agilizando o processo de desenvolvimento e testes./n
-**Dotenv:** Biblioteca para gerenciar variáveis de ambiente, como credenciais do banco de dados e chaves secretas, separando-as do código-fonte e garantindo a segurança da aplicação./n
-**Swagger:** Ferramenta para documentação de APIs, permitindo a criação de uma interface interativa para visualizar e testar as endpoints da API, facilitando o desenvolvimento e a integração com outras aplicações./n
-
+<ul>
+<li>**Node.js:** Ambiente de execução JavaScript, servindo como base para o desenvolvimento do backend do Ecomap.</li>
+<li>**Express.js:** Framework web leve e flexível para Node.js, utilizado para criar a estrutura da API RESTful do Ecomap, permitindo a comunicação entre o frontend e o backend.</li>
+<li>**PostgreSQL:** Sistema de gerenciamento de banco de dados relacional (RDBMS) robusto e escalável, utilizado para armazenar as informações do Ecomap, como dados de usuários, locais de coleta e registros de coleta.</li>
+<li>**Sequelize:** ORM (Object-Relational Mapper) para Node.js, simplificando a interação com o banco de dados PostgreSQL, permitindo a criação de modelos de dados, consultas e operações CRUD (Create, Read, Update, Delete) de forma mais organizada e eficiente.</li>
+<li>**Sequelize-CLI:** Ferramenta de linha de comando para Sequelize, facilitando a criação de tabelas, migrações e outras operações relacionadas ao banco de dados.</li>
+<li>**CORS:** Mecanismo que permite que recursos de diferentes origens (domínios, protocolos e portas) se comuniquem, garantindo segurança e flexibilidade na comunicação entre o frontend e o backend.</li>
+<li>**JWT (JSON Web Token):** Padrão para criação de tokens de autenticação, utilizado para gerenciar a autenticação de usuários e garantir a segurança das requisições à API.</li>
+<li>**Nodemon:** Ferramenta que monitora as alterações nos arquivos do projeto e reinicia automaticamente o servidor Node.js, agilizando o processo de desenvolvimento e testes.</li>
+<li>**Dotenv:** Biblioteca para gerenciar variáveis de ambiente, como credenciais do banco de dados e chaves secretas, separando-as do código-fonte e garantindo a segurança da aplicação.</li>
+<li>**Swagger:** Ferramenta para documentação de APIs, permitindo a criação de uma interface interativa para visualizar e testar as endpoints da API, facilitando o desenvolvimento e a integração com outras aplicações.</li>
+</ul>
 
 <h3>✨Como Executar:</h3>
 
@@ -27,7 +28,7 @@ contribuindo para a preservação do meio ambiente e para a promoção de práti
   
 2. **Clone o repositório:**
     ```bash
-    git clone 
+    git clone "https://github.com/franciscogrimes/EcoMap.git"
     ```
 3. **Instale as dependências:**
     ```bash
