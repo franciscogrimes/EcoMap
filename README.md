@@ -7,16 +7,16 @@ contribuindo para a preservação do meio ambiente e para a promoção de práti
 
 <h3>Técnicas e Tecnologias Utilizadas:</h3>
 
-**Node.js:** Ambiente de execução JavaScript, servindo como base para o desenvolvimento do backend do Ecomap.
-**Express.js:** Framework web leve e flexível para Node.js, utilizado para criar a estrutura da API RESTful do Ecomap, permitindo a comunicação entre o frontend e o backend.
-**PostgreSQL:** Sistema de gerenciamento de banco de dados relacional (RDBMS) robusto e escalável, utilizado para armazenar as informações do Ecomap, como dados de usuários, locais de coleta e registros de coleta.
-**Sequelize:** ORM (Object-Relational Mapper) para Node.js, simplificando a interação com o banco de dados PostgreSQL, permitindo a criação de modelos de dados, consultas e operações CRUD (Create, Read, Update, Delete) de forma mais organizada e eficiente.
-**Sequelize-CLI:** Ferramenta de linha de comando para Sequelize, facilitando a criação de tabelas, migrações e outras operações relacionadas ao banco de dados.
-**CORS:** Mecanismo que permite que recursos de diferentes origens (domínios, protocolos e portas) se comuniquem, garantindo segurança e flexibilidade na comunicação entre o frontend e o backend.
-**JWT (JSON Web Token):** Padrão para criação de tokens de autenticação, utilizado para gerenciar a autenticação de usuários e garantir a segurança das requisições à API.
-**Nodemon:** Ferramenta que monitora as alterações nos arquivos do projeto e reinicia automaticamente o servidor Node.js, agilizando o processo de desenvolvimento e testes.
-**Dotenv:** Biblioteca para gerenciar variáveis de ambiente, como credenciais do banco de dados e chaves secretas, separando-as do código-fonte e garantindo a segurança da aplicação.
-**Swagger:** Ferramenta para documentação de APIs, permitindo a criação de uma interface interativa para visualizar e testar as endpoints da API, facilitando o desenvolvimento e a integração com outras aplicações.
+**Node.js:** Ambiente de execução JavaScript, servindo como base para o desenvolvimento do backend do Ecomap./n
+**Express.js:** Framework web leve e flexível para Node.js, utilizado para criar a estrutura da API RESTful do Ecomap, permitindo a comunicação entre o frontend e o backend./n
+**PostgreSQL:** Sistema de gerenciamento de banco de dados relacional (RDBMS) robusto e escalável, utilizado para armazenar as informações do Ecomap, como dados de usuários, locais de coleta e registros de coleta./n
+**Sequelize:** ORM (Object-Relational Mapper) para Node.js, simplificando a interação com o banco de dados PostgreSQL, permitindo a criação de modelos de dados, consultas e operações CRUD (Create, Read, Update, Delete) de forma mais organizada e eficiente./n
+**Sequelize-CLI:** Ferramenta de linha de comando para Sequelize, facilitando a criação de tabelas, migrações e outras operações relacionadas ao banco de dados./n
+**CORS:** Mecanismo que permite que recursos de diferentes origens (domínios, protocolos e portas) se comuniquem, garantindo segurança e flexibilidade na comunicação entre o frontend e o backend./n
+**JWT (JSON Web Token):** Padrão para criação de tokens de autenticação, utilizado para gerenciar a autenticação de usuários e garantir a segurança das requisições à API./n
+**Nodemon:** Ferramenta que monitora as alterações nos arquivos do projeto e reinicia automaticamente o servidor Node.js, agilizando o processo de desenvolvimento e testes./n
+**Dotenv:** Biblioteca para gerenciar variáveis de ambiente, como credenciais do banco de dados e chaves secretas, separando-as do código-fonte e garantindo a segurança da aplicação./n
+**Swagger:** Ferramenta para documentação de APIs, permitindo a criação de uma interface interativa para visualizar e testar as endpoints da API, facilitando o desenvolvimento e a integração com outras aplicações./n
 
 
 <h3>✨Como Executar:</h3>
@@ -27,7 +27,7 @@ contribuindo para a preservação do meio ambiente e para a promoção de práti
   
 2. **Clone o repositório:**
     ```bash
-    git clone [URL do repositório]
+    git clone 
     ```
 3. **Instale as dependências:**
     ```bash
